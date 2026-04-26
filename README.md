@@ -114,14 +114,6 @@ The system is deployed as a **Streamlit** web application.
 - Color-coded scene verdict: 🟢 **SAFE** / 🔴 **UNSAFE**
 - Confidence scores displayed per detection
 
-**Run locally:**
-```bash
-git clone <repo-url>
-cd helmet-detection
-pip install -r requirements.txt
-streamlit run app.py
-```
-
 ---
 
 ## Project Structure
