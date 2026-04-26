@@ -116,27 +116,6 @@ The system is deployed as a **Streamlit** web application.
 
 ---
 
-## Project Structure
-
-```
-helmet-detection/
-├── data/
-│   ├── images/
-│   └── labels/
-├── runs/
-│   └── detect/
-│       └── train/
-│           └── weights/
-│               └── best.pt
-├── app.py               # Streamlit UI
-├── detect.py            # Inference + safety logic
-├── data.yaml            # Dataset config
-├── requirements.txt
-└── README.md
-```
-
----
-
 ## Tech Stack
 
 | Tool | Purpose |
