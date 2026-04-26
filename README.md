@@ -70,8 +70,8 @@ else:
 > **Note:** The `no_helmet` class is the critical one for safety enforcement. With 92% precision and 88% recall, the model reliably catches most violations while keeping false alarms low.
 
 ### Confusion Matrix
+<img width="1600" height="1200" alt="WhatsApp Image 2026-04-26 at 01 30 51" src="https://github.com/user-attachments/assets/065a79c9-0810-432d-bd66-efade6a8c36f" />
 
-![Confusion Matrix](confusion_matrix.jpeg)
 
 **Reading the matrix:**
 - **Helmet:** 3763 correct predictions, 15 misclassified as no_helmet, 241 missed (background)
