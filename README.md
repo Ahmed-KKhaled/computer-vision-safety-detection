@@ -59,6 +59,7 @@ else:
 ---
 
 ## Results
+<img width="739" height="373" alt="WhatsApp Image 2026-04-26 at 01 32 34" src="https://github.com/user-attachments/assets/5964961e-e0a7-49f5-8d25-1cd01f6ab368" />
 
 ### Per-Class Metrics
 
