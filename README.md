@@ -155,7 +155,3 @@ helmet-detection/
 | NumPy | Array operations |
 | Streamlit | Web UI deployment |
 
-
-## License
-
-This project is for academic and research purposes. Dataset sourced from Roboflow — refer to the original dataset license for usage rights.
