@@ -59,6 +59,12 @@ else:
 ---
 
 ## Results
+
+
+https://github.com/user-attachments/assets/dbd63441-692e-4aa5-ae02-4456338593ec
+
+
+
 <img width="739" height="373" alt="WhatsApp Image 2026-04-26 at 01 32 34" src="https://github.com/user-attachments/assets/5964961e-e0a7-49f5-8d25-1cd01f6ab368" />
 
 ### Per-Class Metrics
@@ -97,17 +103,7 @@ Input Image / Frame
         ▼
   Safety Logic Layer
   (any no_helmet? → UNSAFE)
-        │
-        ▼
-  Streamlit UI Output
-  [Annotated Image + SAFE/UNSAFE Banner]
-```
-
 ---
-
-## Deployment
-
-The system is deployed as a **Streamlit** web application.
 
 **Features:**
 - Image upload interface
