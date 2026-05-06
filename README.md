@@ -11,9 +11,10 @@
 
 ## 🚀 Demo
 
-Upload an image or video → detect workers → get instant safety classification.
 
-> 📹 `videos/demo.mp4`
+
+https://github.com/user-attachments/assets/bf10595c-81f0-41f4-85c5-e068d923a801
+
 
 ---
 
