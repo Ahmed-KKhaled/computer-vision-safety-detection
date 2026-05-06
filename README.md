@@ -1,6 +1,6 @@
 # 🦺 Construction Site Helmet Compliance Detection
 
-> Real-time PPE safety monitoring powered by **YOLOv8** — automatically classifies construction scenes as **SAFE ✅** or **UNSAFE ❌** based on helmet detection.
+> Real-time PPE safety monitoring powered by **YOLOv8** — detects helmet compliance and classifies scenes as **SAFE 🟢** or **UNSAFE 🔴** instantly.
 
 ![Python](https://img.shields.io/badge/Python-3.10+-3776AB?style=flat-square&logo=python&logoColor=white)
 ![YOLOv8](https://img.shields.io/badge/YOLOv8n-Ultralytics-purple?style=flat-square)
@@ -9,30 +9,40 @@
 
 ---
 
+## 🚀 Demo
+
+Upload an image or video → detect workers → get instant safety classification.
+
+> 📹 `videos/demo.mp4`
+
+---
+
 ## 📌 Problem Statement
 
-Construction sites are high-risk environments where PPE (Personal Protective Equipment) compliance — especially helmets — is critical. Manual monitoring is inefficient and inconsistent.
+Construction sites are high-risk environments where helmets are mandatory. Manual monitoring is:
 
-This system automates safety checks using computer vision, delivering instant and reliable assessments from images or live camera feeds.
+- ❌ Inefficient
+- ❌ Error-prone
+- ❌ Not scalable
+
+This system automates compliance checks using computer vision for real-time, reliable safety enforcement.
 
 ---
 
 ## ⚡ Safety Logic
 
-A single strict rule governs scene-level decisions:
-
 ```python
-if any(detection.label == "no_helmet" for detection in detections):
-    scene_status = "UNSAFE ❌"
+if any(d.label == "no_helmet" for d in detections):
+    scene_status = "UNSAFE 🔴"
 else:
-    scene_status = "SAFE ✅"
-\```
+    scene_status = "SAFE 🟢"
+```
 
-| Scenario | Decision |
+| Scenario | Output |
 |---|---|
-| All workers wearing helmets | **SAFE ✅** |
-| At least one worker without a helmet | **UNSAFE ❌** |
-| No workers detected | **SAFE ✅** *(no violation found)* |
+| All workers wearing helmets | 🟢 SAFE |
+| At least one worker without helmet | 🔴 UNSAFE |
+| No workers detected | 🟢 SAFE |
 
 ---
 
@@ -42,23 +52,24 @@ else:
 
 | Property | Details |
 |---|---|
-| Format | YOLO (`.txt` labels) |
+| Format | YOLO annotation format |
 | Classes | `helmet`, `no_helmet` |
 | Split | Train / Validation / Test |
 
 **Challenges addressed:**
-- Class imbalance — helmet instances significantly outnumber `no_helmet`
-- Occlusion and partial visibility of workers
-- Varied camera angles and lighting conditions
-- Similar visual features between classes at distance
+- Class imbalance (`helmet` >> `no_helmet`)
+- Occlusion and small objects
+- Varied lighting conditions
+- Crowded scenes
 
 ---
 
 ## 🧠 Model
 
-| Property | Details |
+| Component | Value |
 |---|---|
-| Architecture | YOLOv8n (Ultralytics) |
+| Model | YOLOv8n |
+| Framework | Ultralytics |
 | Input Size | 640 × 640 px |
 | Epochs | 50 |
 | Task | Object Detection |
@@ -67,9 +78,6 @@ else:
 
 ## 📊 Results
 
-
-
-
 ### Per-Class Metrics
 
 | Class | Precision | Recall | mAP@50 | mAP@50-95 |
@@ -77,48 +85,27 @@ else:
 | `helmet` | 96% | 94% | **98%** | 67.5% |
 | `no_helmet` | 92% | 88% | **91%** | 64.0% |
 
-> **Note:** `no_helmet` is the critical class for safety enforcement. At 92% precision and 88% recall, the model reliably catches most violations while keeping false alarms low.
+> ⚠️ `no_helmet` is the critical safety class — 92% precision and 88% recall means the model catches most violations with minimal false alarms.
 
 ### Confusion Matrix
 
-| | Predicted: helmet | Predicted: no_helmet | Missed (background) |
-|---|---|---|---|
-| **Actual: helmet** | 3763 ✅ | 15 | 241 |
-| **Actual: no_helmet** | 10 | 1276 ✅ | 159 |
-| **Background FP** | 140 | 149 | — |
+| Actual \ Predicted | helmet | no_helmet |
+|---|---|---|
+| **helmet** | 3763 ✅ | 15 |
+| **no_helmet** | 10 | 1276 ✅ |
 
 ---
-
-## 🔁 Inference Pipeline
-
-```
-Input Image / Frame
-        │
-        ▼
-  YOLOv8n Inference
-  (imgsz=640, conf threshold)
-        │
-        ▼
-  Bounding Box Extraction
-  [class: helmet | no_helmet | confidence]
-        │
-        ▼
-  Safety Logic Layer
-  (any no_helmet? → UNSAFE ❌)
-        │
-        ▼
-  Color-coded Scene Verdict
-  🟢 SAFE  /  🔴 UNSAFE
-\```
 
 ---
 
 ## ✨ Features
 
-- 📤 Image upload interface
-- ⚡ Real-time YOLOv8 inference with bounding box overlay
-- 🎨 Color-coded scene verdict: 🟢 **SAFE** / 🔴 **UNSAFE**
-- 📈 Confidence scores displayed per detection
+- 📤 Image & video upload interface
+- 🎯 Real-time YOLOv8 detection
+- 🧠 Automatic safety classification
+- 📦 Bounding boxes with confidence scores
+- 🚨 Instant helmet violation alerts
+- 🎥 Video tracking via ByteTrack
 
 ---
 
@@ -126,28 +113,55 @@ Input Image / Frame
 
 | Tool | Purpose |
 |---|---|
-| Python 3.10+ | Core language |
-| Ultralytics YOLOv8 | Object detection model |
-| OpenCV | Image processing |
-| NumPy | Array operations |
-| Streamlit | Web UI deployment |
+| Python | Core development |
+| YOLOv8 | Object detection |
+| OpenCV | Video processing |
+| NumPy | Data handling |
+| Streamlit | Web UI |
 
 ---
 
-## 🚀 Getting Started
+## 🚀 Installation
 
 ```bash
-git clone https://github.com/Ahmed-KKhaled/computer-vision-safety-detection.git
-cd computer-vision-safety-detection
+git clone https://github.com/username/helmet-detection.git
+cd helmet-detection
 pip install -r requirements.txt
 streamlit run app.py
-\```
+```
 
 ---
 
+## 📦 Inference Example
+
+```python
+from ultralytics import YOLO
+
+model = YOLO("best.pt")
+results = model("test.jpg", conf=0.5)
+results.show()
+```
 
 ---
 
-## 📄 License
+## 🎥 Video Tracking
 
-This project is licensed under the MIT License.
+```python
+results = model.track(
+    source="video.mp4",
+    tracker="bytetrack.yaml",
+    save=True
+)
+```
+
+---
+
+## 📈 Future Improvements
+
+- [ ] Real-time CCTV integration
+- [ ] Dashboard analytics for violations
+- [ ] Alert system (SMS / Email)
+- [ ] Upgrade to YOLOv8s/m for higher accuracy
+- [ ] Cloud deployment
+
+---
