@@ -1,53 +1,60 @@
-# Construction Site Helmet Compliance Detection
+# 🦺 Construction Site Helmet Compliance Detection
 
-A real-time safety monitoring system built with **YOLOv8** that detects whether construction workers are wearing helmets and classifies each scene as **Safe** or **Unsafe**.
+> Real-time PPE safety monitoring powered by **YOLOv8** — automatically classifies construction scenes as **SAFE ✅** or **UNSAFE ❌** based on helmet detection.
+
+![Python](https://img.shields.io/badge/Python-3.10+-3776AB?style=flat-square&logo=python&logoColor=white)
+![YOLOv8](https://img.shields.io/badge/YOLOv8n-Ultralytics-purple?style=flat-square)
+![mAP@50](https://img.shields.io/badge/mAP@50-98%25-2e7d32?style=flat-square)
+![Streamlit](https://img.shields.io/badge/UI-Streamlit-FF4B4B?style=flat-square&logo=streamlit&logoColor=white)
 
 ---
 
-## Problem Statement
+## 📌 Problem Statement
 
-Construction sites are high-risk environments where PPE (Personal Protective Equipment) compliance — especially helmets — is critical. Manual monitoring is inefficient and inconsistent. This system automates that process using computer vision, providing instant and reliable safety assessments from images or live camera feeds.
+Construction sites are high-risk environments where PPE (Personal Protective Equipment) compliance — especially helmets — is critical. Manual monitoring is inefficient and inconsistent.
+
+This system automates safety checks using computer vision, delivering instant and reliable assessments from images or live camera feeds.
 
 ---
 
-## Safety Logic
+## ⚡ Safety Logic
 
-The scene-level decision follows a single strict rule:
+A single strict rule governs scene-level decisions:
 
 ```python
-if any(detection.class == "no_helmet" for detection in detections):
+if any(detection.label == "no_helmet" for detection in detections):
     scene_status = "UNSAFE ❌"
 else:
     scene_status = "SAFE ✅"
-```
+\```
 
 | Scenario | Decision |
 |---|---|
 | All workers wearing helmets | **SAFE ✅** |
-| At least one worker without helmet | **UNSAFE ❌** |
-| No workers detected | **SAFE ✅** (no violation found) |
+| At least one worker without a helmet | **UNSAFE ❌** |
+| No workers detected | **SAFE ✅** *(no violation found)* |
 
 ---
 
-## Dataset
+## 🗂️ Dataset
 
 **Source:** [Roboflow Custom Dataset](https://drive.google.com/drive/folders/1k-4sEVlHFykykAbdwwZEXew4LLb9nzFs?usp=sharing)
 
 | Property | Details |
 |---|---|
-| Format | YOLO (.txt labels) |
+| Format | YOLO (`.txt` labels) |
 | Classes | `helmet`, `no_helmet` |
 | Split | Train / Validation / Test |
 
 **Challenges addressed:**
-- Class imbalance (helmet instances significantly outnumber no_helmet)
+- Class imbalance — helmet instances significantly outnumber `no_helmet`
 - Occlusion and partial visibility of workers
 - Varied camera angles and lighting conditions
 - Similar visual features between classes at distance
 
 ---
 
-## Model
+## 🧠 Model
 
 | Property | Details |
 |---|---|
@@ -58,36 +65,31 @@ else:
 
 ---
 
-## Results
-
-
-https://github.com/user-attachments/assets/dbd63441-692e-4aa5-ae02-4456338593ec
+## 📊 Results
 
 
 
-<img width="739" height="373" alt="WhatsApp Image 2026-04-26 at 01 32 34" src="https://github.com/user-attachments/assets/5964961e-e0a7-49f5-8d25-1cd01f6ab368" />
 
 ### Per-Class Metrics
 
 | Class | Precision | Recall | mAP@50 | mAP@50-95 |
 |---|---|---|---|---|
-| helmet | 96% | 94% | **98%** | 67.5% |
-| no_helmet | 92% | 88% | **91%** | 64.0% |
+| `helmet` | 96% | 94% | **98%** | 67.5% |
+| `no_helmet` | 92% | 88% | **91%** | 64.0% |
 
-> **Note:** The `no_helmet` class is the critical one for safety enforcement. With 92% precision and 88% recall, the model reliably catches most violations while keeping false alarms low.
+> **Note:** `no_helmet` is the critical class for safety enforcement. At 92% precision and 88% recall, the model reliably catches most violations while keeping false alarms low.
 
 ### Confusion Matrix
-<img width="1600" height="1200" alt="WhatsApp Image 2026-04-26 at 01 30 51" src="https://github.com/user-attachments/assets/065a79c9-0810-432d-bd66-efade6a8c36f" />
 
-
-**Reading the matrix:**
-- **Helmet:** 3763 correct predictions, 15 misclassified as no_helmet, 241 missed (background)
-- **No Helmet:** 1276 correct predictions, 10 misclassified as helmet, 159 missed (background)
-- **Background false positives:** 140 helmet and 149 no_helmet false detections from background
+| | Predicted: helmet | Predicted: no_helmet | Missed (background) |
+|---|---|---|---|
+| **Actual: helmet** | 3763 ✅ | 15 | 241 |
+| **Actual: no_helmet** | 10 | 1276 ✅ | 159 |
+| **Background FP** | 140 | 149 | — |
 
 ---
 
-## Pipeline
+## 🔁 Inference Pipeline
 
 ```
 Input Image / Frame
@@ -102,18 +104,25 @@ Input Image / Frame
         │
         ▼
   Safety Logic Layer
-  (any no_helmet? → UNSAFE)
----
-
-**Features:**
-- Image upload interface
-- Real-time YOLOv8 inference with bounding box overlay
-- Color-coded scene verdict: 🟢 **SAFE** / 🔴 **UNSAFE**
-- Confidence scores displayed per detection
+  (any no_helmet? → UNSAFE ❌)
+        │
+        ▼
+  Color-coded Scene Verdict
+  🟢 SAFE  /  🔴 UNSAFE
+\```
 
 ---
 
-## Tech Stack
+## ✨ Features
+
+- 📤 Image upload interface
+- ⚡ Real-time YOLOv8 inference with bounding box overlay
+- 🎨 Color-coded scene verdict: 🟢 **SAFE** / 🔴 **UNSAFE**
+- 📈 Confidence scores displayed per detection
+
+---
+
+## 🛠️ Tech Stack
 
 | Tool | Purpose |
 |---|---|
@@ -123,3 +132,22 @@ Input Image / Frame
 | NumPy | Array operations |
 | Streamlit | Web UI deployment |
 
+---
+
+## 🚀 Getting Started
+
+```bash
+git clone https://github.com/Ahmed-KKhaled/computer-vision-safety-detection.git
+cd computer-vision-safety-detection
+pip install -r requirements.txt
+streamlit run app.py
+\```
+
+---
+
+
+---
+
+## 📄 License
+
+This project is licensed under the MIT License.
