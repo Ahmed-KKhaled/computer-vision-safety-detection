@@ -89,6 +89,8 @@ else:
 > ⚠️ `no_helmet` is the critical safety class — 92% precision and 88% recall means the model catches most violations with minimal false alarms.
 
 ### Confusion Matrix
+<img width="1600" height="1200" alt="WhatsApp Image 2026-05-06 at 10 22 33" src="https://github.com/user-attachments/assets/5be7aa82-fa92-4fa4-a783-70ded6273a30" />
+
 
 | Actual \ Predicted | helmet | no_helmet |
 |---|---|---|
@@ -96,6 +98,67 @@ else:
 | **no_helmet** | 10 | 1276 ✅ |
 
 ---
+---
+## ⚙️ Installation
+
+### 1. Clone the repository
+
+```bash
+git clone https://github.com/Ahmed-KKhaled/computer-vision-safety-detection.git
+cd computer-vision-safety-detection
+```
+
+### 2. Create a virtual environment (recommended)
+
+```bash
+python -m venv venv
+source venv/bin/activate        # Mac/Linux
+venv\Scripts\activate           # Windows
+```
+
+### 3. Install dependencies
+
+```bash
+pip install -r requirements.txt
+```
+
+### 4. Download the dataset
+
+Download `Roboflow Custom Dataset` from [Data](https://github.com/Ahmed-KKhaled/nlp-text-classification/tree/main/Text_Classification_Project/data)
+
+---
+
+## 🚀 Usage
+
+### Run the full notebook
+```bash
+jupyter notebook Safety_Detection_Project/yolo_notebook/yolo.ipynb
+```
+### Run the Streamlit app
+
+```bash
+cd Safety_Detection_Project/UI
+streamlit run app.py
+```
+
+
+---
+
+## 📁 Project Structure
+
+```
+computer-vision-safety-detection/
+│
+├── Safety_Detection_Project/
+│   └── yolo_notebook/
+│       ├── yolo.ipynb
+│   └── UI/
+|       ├── app.py
+|       ├── best.pt
+│
+├── requirements.txt                       # Python dependencies
+└── README.md                              # Project documentation<img width="1600" height="1200" alt="WhatsApp Image 2026-05-06 at 10 22 33" src="https://github.com/user-attachments/assets/08f34c56-903b-401e-83c3-c0ba9c5e0541" />
+
 
 ---
 
@@ -105,7 +168,6 @@ else:
 - 🎯 Real-time YOLOv8 detection
 - 🧠 Automatic safety classification
 - 📦 Bounding boxes with confidence scores
-- 🚨 Instant helmet violation alerts
 - 🎥 Video tracking via ByteTrack
 
 ---
@@ -122,16 +184,6 @@ else:
 
 ---
 
-## 🚀 Installation
-
-```bash
-git clone https://github.com/username/helmet-detection.git
-cd helmet-detection
-pip install -r requirements.txt
-streamlit run app.py
-```
-
----
 
 ## 📦 Inference Example
 
@@ -144,16 +196,6 @@ results.show()
 ```
 
 ---
-
-## 🎥 Video Tracking
-
-```python
-results = model.track(
-    source="video.mp4",
-    tracker="bytetrack.yaml",
-    save=True
-)
-```
 
 ---
 
