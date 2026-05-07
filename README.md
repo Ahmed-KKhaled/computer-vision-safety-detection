@@ -142,24 +142,25 @@ streamlit run app.py
 ```
 
 
----
 
 ## 📁 Project Structure
 
-```
+```text
 computer-vision-safety-detection/
 │
 ├── Safety_Detection_Project/
-│   └── yolo_notebook/
-│       ├── yolo.ipynb
+│   ├── yolo_notebook/
+│   │   ├── yolo.ipynb
+│   │
 │   └── UI/
-|       ├── app.py
-|       ├── best.pt
+│       ├── app.py
+│       ├── best.pt
 │
-├── requirements.txt                       # Python dependencies
-└── README.md                              # Project documentation<img width="1600" height="1200" alt="WhatsApp Image 2026-05-06 at 10 22 33" src="https://github.com/user-attachments/assets/08f34c56-903b-401e-83c3-c0ba9c5e0541" />
+├── requirements.txt
+└── README.md
+```
 
-
+<img width="1600" height="1200" alt="Confusion Matrix" src="https://github.com/user-attachments/assets/08f34c56-903b-401e-83c3-c0ba9c5e0541" />
 ---
 
 ## ✨ Features
